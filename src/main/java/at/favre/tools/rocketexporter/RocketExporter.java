@@ -265,7 +265,7 @@ public interface RocketExporter {
                     normalizedMessages.put(timestamp.toEpochMilli(),
                             new Message(
                                     message.getMsg(),
-                                    message.getU().getName(),
+                                    message.getU().getUsername(),
                                     contextName,
                                     timestamp
                             ));

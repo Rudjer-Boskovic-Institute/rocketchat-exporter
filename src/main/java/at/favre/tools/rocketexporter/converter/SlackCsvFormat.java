@@ -17,10 +17,17 @@ public class SlackCsvFormat implements ExportFormat {
             writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
             for (Message normalizedMessage : messages) {
-                writer.write("\"" + normalizedMessage.getTimestamp().getEpochSecond() + "\"," +
-                        "\"" + normalizedMessage.getChannel() + "\"," +
-                        "\"" + normalizedMessage.getUsername() + "\"," +
-                        "\"" + normalizedMessage.getMessage().replaceAll("\"", "\\\\\"") + "\"" +
+		/*
+		writer.write("\"" + normalizedMessage.getTimestamp().getEpochSecond() + "\"," +
+		        "\"" + normalizedMessage.getChannel() + "\"," +
+		        "\"" + normalizedMessage.getUsername() + "\"," +
+		        "\"" + normalizedMessage.getMessage().replaceAll("\"", "\\\\\"") + "\"" +
+		        "\n");
+		*/
+                writer.write(
+                        "\"" + normalizedMessage.getUsername() + "-irb\"," +
+			"\"" + normalizedMessage.getTimestamp().toEpochMilli() + "\"," +
+                        "\"" + normalizedMessage.getMessage().replaceAll("\"", "'") + "\"" +
                         "\n");
             }
             writer.flush();
